@@ -11,3 +11,12 @@
 /* ************************************************************************** */
 
 
+#ifndef PARSER_H
+# define PARSER_H
+
+# include <fcntl.h>
+# include "../../Get_Next_Line/get_next_line.h"
+
+int		parse_map(const char *map_path);
+
+#endif
