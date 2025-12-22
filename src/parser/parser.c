@@ -22,7 +22,15 @@ static size_t len(char *line)
 	return (i);
 }
 
-int	parse_map(const char *map_path)
+static size_t	close_fd(int fd, char *line)
+{
+	if (line)
+		free(line);
+	close(fd);
+	return (1);
+}
+
+size_t	parse_map(const char *map_path)
 {
 	int		fd;
 	char	*line;
@@ -35,34 +43,23 @@ int	parse_map(const char *map_path)
 		return (1);
 	line = get_next_line(fd);
 	if (!line)
-	{
-		close(fd);
-		return (1);
-	}
+		return (close_fd(fd, line));
 	width = len(line);
 	i = 0;
 	while (line)
 	{
 		length++;
 		if (len(line) != width)
-		{
-			free(line);
-			close(fd);
-			return (1);
-		}
+			return (close_fd(fd, line));
 		while (line[i])
 		{
 			if (line[i] != '0' || line[i] != '1' || line[i] != 'C' &&
 			    line[i] != 'E' || line[i] != 'P' || (i < width && line[i] != '\n'))
-			{
-				free(line);
-				close(fd);
-				return (1);
-			}
+				return (close_fd(fd, line));
 			i++;
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	return (0);
+	return (close(fd), width);
 }

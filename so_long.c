@@ -10,14 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 int main(int argc, char **argv)
 {
+	char	**map;
+
 	if (argc != 2)
 	{
 		perror("Invalid number of arguments\n Use: ./so_long <map_path>");
 		return (1);
 	}
-	if (parse_map(argv[1]) != 0)
+	if (parse_map(argv[1]) == 1)
 	{
 		perror("Error\n Invalid map");
 		return (1);
