@@ -4,3 +4,6 @@
 [submodule "Get_Next_Line"]
 	path = Get_Next_Line
 	url = git@github.com:Powopaf/Get_Next_Line.git
+[submodule "libft"]
+	path = libft
+	url = git@github.com:Powopaf/Libft42.git

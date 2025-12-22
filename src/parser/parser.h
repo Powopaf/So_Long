@@ -17,6 +17,14 @@
 # include <fcntl.h>
 # include "../../Get_Next_Line/get_next_line.h"
 
-int		parse_map(const char *map_path);
+typedef struct	s_map
+{
+	char	obj;
+	int		has_been_collected;
+	int		is_exit_open;
+	int		has_player;
+} t_map;
+
+t_map	**parse_map(const char *map_path);
 
 #endif

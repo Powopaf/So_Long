@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "src/parser/parser.h"
 
 int main(int argc, char **argv)
 {
@@ -21,7 +22,8 @@ int main(int argc, char **argv)
 		perror("Invalid number of arguments\n Use: ./so_long <map_path>");
 		return (1);
 	}
-	if (parse_map(argv[1]) == 1)
+	map = parse_map(argv[1]);
+	if (map == NULL)
 	{
 		perror("Error\n Invalid map");
 		return (1);

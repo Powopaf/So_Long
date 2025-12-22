@@ -23,7 +23,8 @@ SRC = ./Get_Next_Line/get_next_line.c \
 	  ./Get_Next_Line/get_next_line_utils.c \
 	  ./so_long.c \
 	  ./src/parser/parser.c \
-	  ./src/game/run.c
+	  ./src/game/run.c \
+	  ./src/parser/map.c
 
 OBJ = $(SRC:.c=.o)
 
