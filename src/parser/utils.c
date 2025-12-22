@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 11:00:27 by pifourni          #+#    #+#             */
-/*   Updated: 2025/12/17 11:00:28 by pifourni         ###   ########.fr       */
+/*   Created: 2025/12/22 14:24:45 by pifourni          #+#    #+#             */
+/*   Updated: 2025/12/22 14:24:47 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser.h"
 
-#ifndef PARSER_H
-# define PARSER_H
-
-# include <fcntl.h>
-# include "../../gnl/get_next_line.h"
-# include "../../libft/libft.h"
-
-typedef struct	s_map
+void	close_fd(int fd, char *line)
 {
-	char	obj;
-	int		has_been_collected;
-	int		is_exit_open;
-	int		has_player;
-} t_map;
+	if (line)
+		free(line);
+	close(fd);
+}
 
-t_map	**parse_map(const char *map_path, size_t *height);
-void	close_fd(int fd, char *line);
-void	free_map(t_map **map, size_t height);
+void	free_map(t_map **map, size_t height)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (i < height)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}

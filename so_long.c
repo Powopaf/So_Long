@@ -12,21 +12,24 @@
 
 #include <stdio.h>
 #include "src/parser/parser.h"
+#include "error_msg.h"
 
 int main(int argc, char **argv)
 {
-	char	**map;
+	t_map	**map;
+	size_t	height;
 
 	if (argc != 2)
 	{
-		perror("Invalid number of arguments\n Use: ./so_long <map_path>");
+		write(2, ERR_INVALID_ARGS, sizeof(ERR_INVALID_ARGS));
 		return (1);
 	}
-	map = parse_map(argv[1]);
+	map = parse_map(argv[1], &height);
 	if (map == NULL)
 	{
-		perror("Error\n Invalid map");
+		write(2, ERR_INVALID_MAP, sizeof(ERR_INVALID_MAP));
 		return (1);
 	}
+	free_map(map, height);
 	return (0);
 }
