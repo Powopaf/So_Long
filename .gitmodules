@@ -7,3 +7,6 @@
 [submodule "libft"]
 	path = libft
 	url = git@github.com:Powopaf/Libft42.git
+[submodule "gnl"]
+	path = gnl
+	url = git@github.com:Powopaf/Get_Next_Line.git
