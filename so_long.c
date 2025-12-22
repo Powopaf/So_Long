@@ -14,7 +14,7 @@
 #include "src/parser/parser.h"
 #include "error_msg.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_map	**map;
 	size_t	height;

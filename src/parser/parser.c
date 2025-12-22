@@ -19,8 +19,8 @@ static int	check_line(char *line, size_t width)
 	i = 0;
 	while (i <= width)
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'C' &&
-			line[i] != 'E' && line[i] != 'P' && line[i] != '\n')
+		if (line[i] != '0' && line[i] != '1' && line[i] != 'C'
+			&& line[i] != 'E' && line[i] != 'P' && line[i] != '\n')
 			return (0);
 		i++;
 	}
@@ -29,7 +29,7 @@ static int	check_line(char *line, size_t width)
 
 static int	check_map(const char *map_path, size_t *width, size_t *height)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	fd = open(map_path, O_RDONLY);
@@ -57,8 +57,8 @@ static int	build_map(t_map **map, size_t width, size_t height, int fd)
 	size_t	i;
 	size_t	j;
 
-	j = 0;
-	while (j < height)
+	j = -1;
+	while (++j < height)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
@@ -76,7 +76,6 @@ static int	build_map(t_map **map, size_t width, size_t height, int fd)
 			map[j][i].has_player = 0;
 		}
 		free(line);
-		j++;
 	}
 	return (1);
 }
@@ -97,6 +96,6 @@ t_map	**parse_map(const char *map_path, size_t *height)
 		return (free(map), NULL);
 	if (!build_map(map, width, *height, fd))
 		return (close_fd(fd, NULL), free_map(map, *height), NULL);
-	close(fd);	
+	close(fd);
 	return (map);
 }
