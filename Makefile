@@ -6,7 +6,7 @@
 #    By: pifourni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 11:01:47 by pifourni          #+#    #+#              #
-#    Updated: 2025/12/22 15:01:27 by pifourni         ###   ########.fr        #
+#    Updated: 2026/01/05 10:24:16 by pifourni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBFT = libft/libft.a
 SRC = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
 	  ./so_long.c \
 	  ./src/parser/parser.c ./src/parser/utils.c \
-	  ./src/game/run.c
+#	  ./src/game/run.c
 
 OBJ = $(SRC:.c=.o)
 
