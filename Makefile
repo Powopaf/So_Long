@@ -23,7 +23,7 @@ LIBFT = libft/libft.a
 SRC = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
 	  ./so_long.c \
 	  ./src/parser/parser.c ./src/parser/utils.c \
-#	  ./src/game/run.c
+	  ./src/game/run.c
 
 OBJ = $(SRC:.c=.o)
 
