@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 13:58:22 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/07 14:09:15 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/07 16:54:49 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,8 @@
 # define SCALE 10
 
 void	run(t_map **map, size_t width, size_t height);
+void	square(t_data *frame, int x, int y, unsigned int color);
+void	collectible(t_data *frame, int x, int y, unsigned int color);
+void	triangle(t_data *frame, int x, int y, unsigned int color);
 
 #endif
