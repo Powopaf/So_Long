@@ -87,11 +87,11 @@ void	triangle(t_data *frame, int x, int y, unsigned int color)
 		j = 0;
 		while (j < len)
 		{
-			pixel(frame, x + i + 2, y + j, color);
+			pixel(frame, x + i, y + j, color);
 			j++;
 		}
 		i++;
-		if (i > 4)
+		if (i > 8)
 			len--;
 		else
 			len++;
