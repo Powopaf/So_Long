@@ -34,10 +34,10 @@ void	square(t_data	*frame, int x, int y, unsigned int color)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	while (i < SCALE - 1)
 	{
-		j = 0;
+		j = 1;
 		while (j < SCALE - 1)
 		{
 			pixel(frame, x + i, y + j, color);

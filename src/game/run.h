@@ -17,7 +17,7 @@
 # include "../../minilibx-linux/mlx.h"
 # include "../parser/parser.h"
 
-# define SCALE 10
+# define SCALE 20
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
 # define GREEN 0x0000FF00
