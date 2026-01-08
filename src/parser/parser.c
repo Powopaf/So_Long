@@ -80,13 +80,12 @@ static int	build_map(t_map **map, size_t width, size_t height, int fd)
 	return (1);
 }
 
-t_map	**parse_map(const char *map_path, size_t *height)
+t_map	**parse_map(const char *map_path, size_t *height, size_t *width)
 {
-	size_t	width;
 	t_map	**map;
 	int		fd;
 
-	if (!check_map(map_path, &width, height))
+	if (!check_map(map_path, width, height))
 		return (NULL);
 	map = malloc(sizeof(t_map *) * (*height));
 	if (map == NULL)
@@ -94,7 +93,7 @@ t_map	**parse_map(const char *map_path, size_t *height)
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return (free(map), NULL);
-	if (!build_map(map, width, *height, fd))
+	if (!build_map(map, *width, *height, fd))
 		return (close_fd(fd, NULL), free_map(map, *height), NULL);
 	close(fd);
 	return (map);

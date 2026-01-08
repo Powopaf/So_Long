@@ -18,20 +18,7 @@ static void	init_frame(t_data	*frame, void *mlx, size_t width, size_t height)
 	frame->addr = mlx_get_data_addr(frame->img, &frame->bpp, &frame->length, &frame->endian);
 }
 
-void	run(t_map **map, size_t width, size_t height)
-{
-	void	*mlx;
-	void	*window;
-	t_data	frame1;
-	t_data	frame2;
-
-	mlx = mlx_init();
-	window = mlx_new_window(mlx, width * SCALE, height * SCALE, "So_Long");
-	init_frame(&frame1, mlx, width, height);
-	init_frame(&frame2, mlx, width, height);
-}
-
-void	render_map(t_data *frame, t_map **map, size_t width, size_t height)
+static void	render_map(t_data *frame, t_map **map, size_t width, size_t height)
 {
  	size_t	i;
 	size_t	j;
@@ -58,4 +45,21 @@ void	render_map(t_data *frame, t_map **map, size_t width, size_t height)
 				square(frame, i, j, BLACK);
 		}
 	}
+}
+
+void	run(t_map **map, size_t width, size_t height)
+{
+	void	*mlx;
+	void	*window;
+	t_data	frame1;
+	t_data	frame2;
+
+	mlx = mlx_init();
+	window = mlx_new_window(mlx, width * SCALE, height * SCALE, "So_Long");
+	init_frame(&frame1, mlx, width, height);
+	init_frame(&frame2, mlx, width, height);
+	render_map(&frame1, map, width, height);
+	mlx_put_image_to_window(mlx, window, frame1.img, 0, 0);
+	mlx_loop(mlx);
+
 }

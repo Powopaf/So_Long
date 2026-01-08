@@ -25,7 +25,7 @@ typedef struct s_map
 	int		has_player;
 }	t_map;
 
-t_map	**parse_map(const char *map_path, size_t *height);
+t_map	**parse_map(const char *map_path, size_t *height, size_t *width);
 void	close_fd(int fd, char *line);
 void	free_map(t_map **map, size_t height);
 
