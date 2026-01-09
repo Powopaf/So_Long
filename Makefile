@@ -19,6 +19,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 LIB = -lXext -lX11
 MLX = minilibx-linux/libmlx_Linux.a
 LIBFT = libft/libft.a
+PRINTF = printf/libftprintf.a
 
 SRC = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
 	  ./so_long.c \
@@ -40,8 +41,13 @@ $(LIBFT):
 	$(MAKE) -C ./libft
 	@echo -e '\033[32m Libft Compiled ! \033[0m'
 
-$(NAME): $(OBJ) $(MLX)
-	$(CC) -o $(NAME) $+ $(LIB) $(MLX)
+$(PRINTF):
+	@echo -e '\033[34m Compiling Ft_printf ... \033[0m'
+	$(MAKE) -C ./printf
+	@echo -e '\033[32m Ft_printf Compiled ! \033[0m'
+
+$(NAME): $(OBJ) $(MLX) $(LIBFT) $(PRINTF)
+	$(CC) -o $(NAME) $+ $(LIB) $(MLX) $(LIBFT) $(PRINTF)
 
 %.o:%.c
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -50,6 +56,7 @@ clean:
 	rm -f $(OBJ)
 	$(MAKE) -C ./minilibx-linux clean
 	$(MAKE) -C ./libft clean
+	$(MAKE) -C ./printf clean
 
 fclean: clean
 	rm -f $(NAME)

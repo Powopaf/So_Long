@@ -12,15 +12,20 @@
 
 #include "parser.h"
 
-static int	check_line(char *line, size_t width)
+static int	check_line(char *line, size_t width, t_parser *parser)
 {
 	size_t	i;
 
 	i = 0;
-	while (i <= width)
+	while (i < width)
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'C'
-			&& line[i] != 'E' && line[i] != 'P' && line[i] != '\n')
+		if (line[i] == 'C')
+			parser->has_collectible += 1;
+		else if (line[i] == 'E')
+			parser->has_exit += 1;
+		else if (line[i] == 'P')
+			parser->has_entry += 1;
+		else if (line[i] != '0' && line[i] != '1' && line[i] != '\n')
 			return (0);
 		i++;
 	}
@@ -31,24 +36,41 @@ static int	check_map(const char *map_path, size_t *width, size_t *height)
 {
 	int		fd;
 	char	*line;
+	t_parser	parser;
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return (0);
 	*height = 0;
+	parser.has_exit = 0;
+	parser.has_entry = 0;
+	parser.has_collectible = 0;
 	line = get_next_line(fd);
 	if (line == NULL)
 		return (close_fd(fd, line), 0);
 	*width = ft_strlen(line) - 1;
 	while (line)
 	{
-		if ((ft_strlen(line) - 1 != *width || !check_line(line, *width)))
+		if ((ft_strlen(line) - 1 != *width || !check_line(line, *width, &parser)))
 			return (close_fd(fd, line), 0);
 		(*height)++;
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (parser.has_exit != 1 || parser.has_entry != 1 || parser.has_collectible < 1)
+		return (close_fd(fd, line), 0);
 	return (close_fd(fd, line), 1);
+}
+
+static void	assign_map_object(t_map *map_cell, char obj)
+{
+	map_cell->obj = obj;
+	map_cell->has_been_collected = 0;
+	map_cell->is_exit_open = 0;
+	if (obj == 'P')
+		map_cell->has_player = 1;
+	else
+		map_cell->has_player = 0;
 }
 
 static int	build_map(t_map **map, size_t width, size_t height, int fd)
@@ -69,12 +91,7 @@ static int	build_map(t_map **map, size_t width, size_t height, int fd)
 			return (free(line), 0);
 		i = -1;
 		while (++i < width)
-		{
-			map[j][i].obj = line[i];
-			map[j][i].has_been_collected = 0;
-			map[j][i].is_exit_open = 0;
-			map[j][i].has_player = 0;
-		}
+			assign_map_object(&map[j][i], line[i]);
 		free(line);
 	}
 	return (1);
@@ -82,8 +99,8 @@ static int	build_map(t_map **map, size_t width, size_t height, int fd)
 
 t_map	**parse_map(const char *map_path, size_t *height, size_t *width)
 {
-	t_map	**map;
-	int		fd;
+	t_map		**map;
+	int			fd;
 
 	if (!check_map(map_path, width, height))
 		return (NULL);

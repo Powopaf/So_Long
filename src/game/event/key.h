@@ -6,7 +6,7 @@
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 10:19:57 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/09 11:40:04 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/09 12:36:54 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 
 # include "../../../minilibx-linux/mlx.h"
 # include "../data.h"
+# include "../../../printf/ft_printf.h"
+# include <unistd.h>
 
-int	close_win(int keycode, void *p);
+# define KEY_UP 65362
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_DOWN 65364
+# define KEY_ESC 65307
+
+int	event(int keycode, void *p);
 
 #endif 

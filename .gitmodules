@@ -10,3 +10,6 @@
 [submodule "gnl"]
 	path = gnl
 	url = git@github.com:Powopaf/Get_Next_Line.git
+[submodule "printf"]
+	path = printf
+	url = git@github.com:Powopaf/Printf.git

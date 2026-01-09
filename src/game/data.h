@@ -13,6 +13,8 @@
 #ifndef DATA_H
 #define DATA_H
 
+# include "../parser/parser.h"
+
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -27,7 +29,9 @@ typedef struct s_mlx
 	void	*win;
 	t_data	frame1;
 	t_data	frame2;
-	int 	curr_frame;
+	int 	moves;
+	t_map	**map;
+	
 } t_mlx;
 
 #endif

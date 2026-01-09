@@ -17,6 +17,14 @@
 # include "../../gnl/get_next_line.h"
 # include "../../libft/libft.h"
 
+typedef struct s_parser
+{
+	int	has_exit;
+	int has_entry;
+	int	has_collectible;
+}	t_parser;
+
+
 typedef struct s_map
 {
 	char	obj;
