@@ -6,7 +6,7 @@
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:01:21 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/08 12:20:36 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/09 11:40:22 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,16 @@ static void	render_map(t_data *frame, t_map **map, size_t width, size_t height)
 
 void	run(t_map **map, size_t width, size_t height)
 {
-	void	*mlx;
-	void	*window;
-	t_data	frame1;
-	t_data	frame2;
+	t_mlx	 mlx;
 
-	mlx = mlx_init();
-	window = mlx_new_window(mlx, height * SCALE, width * SCALE, "So_Long");
-	init_frame(&frame1, mlx, width, height);
-	init_frame(&frame2, mlx, width, height);
-	render_map(&frame1, map, width, height);
-	mlx_put_image_to_window(mlx, window, frame1.img, 0, 0);
-	mlx_loop(mlx);
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, height * SCALE, width * SCALE, "So_Long");
+	init_frame(&mlx.frame1, mlx.mlx, width, height);
+	init_frame(&mlx.frame2, mlx.mlx, width, height);
+	render_map(&mlx.frame1, map, width, height);
+	mlx.curr_frame = 1;
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.frame1.img, 0, 0);
+	mlx_hook(mlx.win, 2, 1L<<0, close_win, &mlx);
+	mlx_loop(mlx.mlx);
 
 }

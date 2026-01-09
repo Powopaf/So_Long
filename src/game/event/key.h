@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.h                                             :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/05 10:37:06 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/09 11:10:13 by pifourni         ###   ########.fr       */
+/*   Created: 2026/01/09 10:19:57 by pifourni          #+#    #+#             */
+/*   Updated: 2026/01/09 11:40:04 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_H
-#define DATA_H
+#ifndef KEY_H
+# define KEY_H
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		length;
-	int		endian;
-}	t_data;
+# include "../../../minilibx-linux/mlx.h"
+# include "../data.h"
 
-typedef struct s_mlx
-{
-	void	*mlx;
-	void	*win;
-	t_data	frame1;
-	t_data	frame2;
-	int 	curr_frame;
-} t_mlx;
+int	close_win(int keycode, void *p);
 
-#endif
+#endif 

@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.h                                             :+:      :+:    :+:   */
+/*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/05 10:37:06 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/09 11:10:13 by pifourni         ###   ########.fr       */
+/*   Created: 2026/01/09 10:19:51 by pifourni          #+#    #+#             */
+/*   Updated: 2026/01/09 11:39:46 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_H
-#define DATA_H
+#include "key.h"
+#include <stdlib.h>
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		length;
-	int		endian;
-}	t_data;
-
-typedef struct s_mlx
+int	close_win(int keycode, void *p)
 {
-	void	*mlx;
-	void	*win;
-	t_data	frame1;
-	t_data	frame2;
-	int 	curr_frame;
-} t_mlx;
+	t_mlx	mlx;
 
-#endif
+	mlx = *(t_mlx *)p;
+	mlx_destroy_window(mlx.mlx, mlx.win);
+	exit(0);
+	return (keycode);
+}

@@ -6,7 +6,7 @@
 /*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 13:58:22 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/08 12:18:01 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/09 11:10:25 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "data.h"
 # include "../../minilibx-linux/mlx.h"
 # include "../parser/parser.h"
+# include "event/key.h"
 
 # define SCALE 20
 # define WHITE 0x00FFFFFF
