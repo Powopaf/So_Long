@@ -31,6 +31,8 @@ typedef struct s_mlx
 	t_data	frame2;
 	int 	moves;
 	t_map	**map;
+	size_t	width;
+	size_t	height;
 	
 } t_mlx;
 

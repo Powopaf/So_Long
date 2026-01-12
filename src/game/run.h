@@ -28,6 +28,7 @@
 # define BLUE 0x000000FF
 
 void	run(t_map **map, size_t width, size_t height);
+void	render_map(t_data *frame, t_map **map, size_t width, size_t height);
 void	square(t_data *frame, int x, int y, unsigned int color);
 void	collectible(t_data *frame, int x, int y, unsigned int color);
 void	triangle(t_data *frame, int x, int y, unsigned int color);

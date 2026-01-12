@@ -57,6 +57,7 @@ void	collectible(t_data *frame, int x, int y, unsigned int color)
 
 	center = SCALE / 2;
 	row = 0;
+	square(frame, x, y, BLACK);
 	while (row < SCALE - 1)
 	{
 		if (row - center < 0)
@@ -82,6 +83,7 @@ void	triangle(t_data *frame, int x, int y, unsigned int color)
 
 	i = 0;
 	len = 1;
+	square(frame, x, y, BLACK);
 	while (i < SCALE - 1)
 	{
 		j = 0;
