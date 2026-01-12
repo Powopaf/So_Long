@@ -26,7 +26,7 @@ static void	pixel(t_data *frame, int x, int y, unsigned int color)
 	char	*dst;
 
 	dst = frame->addr + (y * frame->length + x * (frame->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 void	square(t_data	*frame, int x, int y, unsigned int color)
@@ -79,7 +79,7 @@ void	triangle(t_data *frame, int x, int y, unsigned int color)
 {
 	int	i;
 	int	j;
-	int len;
+	int	len;
 
 	i = 0;
 	len = 1;

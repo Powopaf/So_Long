@@ -42,7 +42,6 @@ static int	assign_new_position(t_map **map, int x, int y, int direction)
 	return (0);
 }
 
-
 static int	move_player(t_mlx *mlx, int direction)
 {
 	size_t	i;
@@ -65,6 +64,25 @@ static int	move_player(t_mlx *mlx, int direction)
 	return (0);
 }
 
+void	move_and_render(t_mlx *mlx, int moved)
+{
+	if (moved)
+	{
+		mlx->moves += 1;
+		ft_printf("Moves: %d\n", mlx->moves);
+		if (mlx->moves % 2 == 0)
+		{
+			render_map(&mlx->frame1, mlx->map, mlx->width, mlx->height);
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->frame1.img, 0, 0);
+		}
+		else
+		{
+			render_map(&mlx->frame2, mlx->map, mlx->width, mlx->height);
+			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->frame2.img, 0, 0);
+		}
+	}
+}
+
 int	event(int keycode, void *p)
 {
 	t_mlx	*mlx;
@@ -85,20 +103,6 @@ int	event(int keycode, void *p)
 		mlx_destroy_window(mlx->mlx, mlx->win);
 		exit(0);
 	}
-	if (moved)
-	{
-		mlx->moves += 1;
-		ft_printf("Moves: %d\n", mlx->moves);
-		if (mlx->moves % 2 == 0)
-		{
-			render_map(&mlx->frame1, mlx->map, mlx->width, mlx->height);
-			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->frame1.img, 0, 0);
-		}
-		else
-		{
-			render_map(&mlx->frame2, mlx->map, mlx->width, mlx->height);
-			mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->frame2.img, 0, 0);
-		}
-	}
+	move_and_render(mlx, moved);
 	return (0);
 }

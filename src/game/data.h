@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #ifndef DATA_H
-#define DATA_H
+# define DATA_H
 
 # include "../parser/parser.h"
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		bpp;
@@ -29,11 +29,10 @@ typedef struct s_mlx
 	void	*win;
 	t_data	frame1;
 	t_data	frame2;
-	int 	moves;
+	int		moves;
 	t_map	**map;
 	size_t	width;
 	size_t	height;
-	
-} t_mlx;
+}	t_mlx;
 
 #endif
