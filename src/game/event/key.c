@@ -13,31 +13,45 @@
 #include "key.h"
 #include "../run.h"
 
-static int	assign_new_position(t_map **map, int x, int y, int direction)
+static int	edit_map(t_map **map, int x, int y, size_t width, size_t height)
 {
-	if (direction == KEY_UP && map[x - 1][y].obj != '1')
+	int	exit_x;
+	int	exit_y;
+
+	if (map[x][y].obj == 'C')
 	{
-		map[x - 1][y].has_player = 1;
-		map[x][y].has_player = 0;
-		return (1);
+		map[x][y].has_been_collected = 1;
+		map[x][y].obj = '0';
 	}
-	else if (direction == KEY_DOWN && map[x + 1][y].obj != '1')
+	else if (is_exit_open(map, width, height))
 	{
-		map[x + 1][y].has_player = 1;
-		map[x][y].has_player = 0;
-		return (1);
+		find_exit_position(map, &exit_x, &exit_y, width, height);
+		map[exit_x][exit_y].is_exit_open = 1;
 	}
-	else if (direction == KEY_LEFT && map[x][y - 1].obj != '1')
+	return (1);
+}
+
+
+static int	assign_new_position(t_map **map, int x, int y, int direction, size_t width, size_t height)
+{
+	int	dx;
+	int	dy;
+
+	dx = 0;
+	dy = 0;
+	if (direction == KEY_UP)
+		dx = -1;
+	else if (direction == KEY_DOWN)
+		dx = 1;
+	else if (direction == KEY_LEFT)
+		dy = -1;
+	else if (direction == KEY_RIGHT)
+		dy = 1;
+	if ((dx != 0 || dy != 0) && map[x + dx][y + dy].obj != '1')
 	{
-		map[x][y - 1].has_player = 1;
+		map[x + dx][y + dy].has_player = 1;
 		map[x][y].has_player = 0;
-		return (1);
-	}
-	else if (direction == KEY_RIGHT && map[x][y + 1].obj != '1')
-	{
-		map[x][y + 1].has_player = 1;
-		map[x][y].has_player = 0;
-		return (1);
+		return (edit_map(map, x + dx, y + dy, width, height));
 	}
 	return (0);
 }
@@ -55,7 +69,7 @@ static int	move_player(t_mlx *mlx, int direction)
 		{
 			if (mlx->map[i][j].has_player == 1)
 			{
-				return (assign_new_position(mlx->map, i, j, direction));
+				return (assign_new_position(mlx->map, i, j, direction, mlx->width, mlx->height));
 			}
 			j++;
 		}

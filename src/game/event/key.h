@@ -24,6 +24,8 @@
 # define KEY_DOWN 65364
 # define KEY_ESC 65307
 
-int	event(int keycode, void *p);
+int		event(int keycode, void *p);
+int		is_exit_open(t_map **map, size_t width, size_t height);
+void	find_exit_position(t_map **map, int *x, int *y, size_t width, size_t height);
 
 #endif 
