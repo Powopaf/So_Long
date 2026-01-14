@@ -6,12 +6,13 @@
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 10:19:51 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/09 12:40:40 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:04:31 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key.h"
 #include "../run.h"
+#include "../../../gnl/get_next_line.h"
 
 static int	edit_map(t_mlx *mlx, int x, int y)
 {
@@ -25,14 +26,13 @@ static int	edit_map(t_mlx *mlx, int x, int y)
 	}
 	else if (is_exit_open(mlx->map, mlx->width, mlx->height))
 	{
-		find_exit_position(mlx->map, &exit_x, &exit_y, mlx->width, mlx->height);
+		find_exit_position(mlx, &exit_x, &exit_y);
 		mlx->map[exit_x][exit_y].is_exit_open = 1;
 		if (x == exit_x && y == exit_y)
 			return (end_game(mlx));
 	}
 	return (1);
 }
-
 
 static int	assign_new_position(t_mlx *mlx, int x, int y, int direction)
 {
@@ -115,6 +115,8 @@ int	event(int keycode, void *p)
 	else if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->win);
+		free_map(mlx->map, mlx->height);
+		get_next_line(-1);
 		exit(0);
 	}
 	move_and_render(mlx, moved);

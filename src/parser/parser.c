@@ -69,12 +69,13 @@ static int	build_map(t_map **map, size_t width, size_t height, int fd)
 		if (line == NULL)
 			return (0);
 		i = 0;
-		map[j] = malloc(sizeof(t_map) * width);
+		map[j] = malloc(sizeof(t_map) * (width + 1));
 		if (map[j] == NULL)
 			return (free(line), 0);
 		i = -1;
 		while (++i < width)
 			assign_map_object(&map[j][i], line[i]);
+		map[j][width].obj = '\0';
 		free(line);
 	}
 	return (1);

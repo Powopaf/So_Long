@@ -6,7 +6,7 @@
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 10:37:06 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/09 11:10:13 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:00:53 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "../parser/parser.h"
 
-typedef struct s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bpp;

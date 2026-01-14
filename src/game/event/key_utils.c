@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pifourni <pifourni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/14 11:03:39 by pifourni          #+#    #+#             */
+/*   Updated: 2026/01/14 11:04:02 by pifourni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "key.h"
 #include "../run.h"
 
@@ -7,7 +19,6 @@ int	is_exit_open(t_map **map, size_t width, size_t height)
 	size_t	j;
 
 	i = 0;
-
 	while (i < height)
 	{
 		j = 0;
@@ -24,18 +35,18 @@ int	is_exit_open(t_map **map, size_t width, size_t height)
 	return (1);
 }
 
-void	find_exit_position(t_map **map, int *x, int *y, size_t width, size_t height)
+void	find_exit_position(t_mlx *mlx, int *x, int *y)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	while (i < height)
+	while (i < mlx->height)
 	{
 		j = 0;
-		while (j < width)
+		while (j < mlx->width)
 		{
-			if (map[i][j].obj == 'E')
+			if (mlx->map[i][j].obj == 'E')
 			{
 				*x = i;
 				*y = j;

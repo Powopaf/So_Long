@@ -6,7 +6,7 @@
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 10:19:57 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/09 12:36:54 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:02:59 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 
 int		event(int keycode, void *p);
 int		is_exit_open(t_map **map, size_t width, size_t height);
-void	find_exit_position(t_map **map, int *x, int *y, size_t width, size_t height);
+void	find_exit_position(t_mlx *mlx, int *x, int *y);
 
 #endif 
