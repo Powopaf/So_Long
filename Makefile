@@ -26,6 +26,7 @@ SRC = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
 	  ./src/parser/parser.c ./src/parser/utils.c \
 	  ./src/game/run.c ./src/game/draw.c \
 	  ./src/game/event/key.c ./src/game/event/key_utils.c \
+	  ./src/game/end.c
 
 OBJ = $(SRC:.c=.o)
 
