@@ -61,6 +61,7 @@ static void	display(t_mlx *mlx)
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->frame2.img, 0, 0);
 	}
 	mlx_hook(mlx->win, 2, 1L << 0, event, mlx);
+	mlx_hook(mlx->win, 17, 0, close_window, mlx);
 	mlx_loop(mlx->mlx);
 }
 

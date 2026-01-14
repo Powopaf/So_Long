@@ -25,6 +25,7 @@
 # define KEY_ESC 65307
 
 int		event(int keycode, void *p);
+int		close_window(void *p);
 int		is_exit_open(t_map **map, size_t width, size_t height);
 void	find_exit_position(t_mlx *mlx, int *x, int *y);
 

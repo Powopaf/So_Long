@@ -56,3 +56,15 @@ void	find_exit_position(t_mlx *mlx, int *x, int *y)
 		i++;
 	}
 }
+
+int	close_window(void *p)
+{
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *)p;
+	mlx_destroy_window(mlx->mlx, mlx->win);
+	free_map(mlx->map, mlx->height);
+	get_next_line(-1);
+	exit(0);
+	return (0);
+}
