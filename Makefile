@@ -16,9 +16,8 @@
 NAME = so_long
 CC = cc
 
-SAN_FLAGS ?= -fsanitize=address -g
-CFLAGS = -Wall -Wextra -Werror $(SAN_FLAGS)
-LIB = -lXext -lX11 $(SAN_FLAGS)
+CFLAGS = -Wall -Wextra -Werror
+LIB = -lXext -lX11 
 MLX_CFLAGS = -w
 MLX = minilibx-linux/libmlx_Linux.a
 LIBFT = libft/libft.a
@@ -43,12 +42,12 @@ $(MLX):
 	@echo -e '\033[32m MiniLibX Compiled ! \033[0m'
 $(LIBFT):
 	@echo -e '\033[34m Compiling Libft ... \033[0m'
-	$(MAKE) -C ./libft CFLAGS="$(CFLAGS)"
+	$(MAKE) -C ./libft
 	@echo -e '\033[32m Libft Compiled ! \033[0m'
 
 $(PRINTF):
 	@echo -e '\033[34m Compiling Ft_printf ... \033[0m'
-	$(MAKE) -C ./printf CFLAGS="$(CFLAGS)"
+	$(MAKE) -C ./printf
 	@echo -e '\033[32m Ft_printf Compiled ! \033[0m'
 
 $(NAME): $(OBJ) $(MLX) $(LIBFT) $(PRINTF)
@@ -65,6 +64,5 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f ./libft/libft.a
 	
 re: fclean all
