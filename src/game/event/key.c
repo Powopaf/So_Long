@@ -115,6 +115,11 @@ int	event(int keycode, void *p)
 	else if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->win);
+		mlx_destroy_image(mlx->mlx, mlx->frame1.img);
+		mlx_destroy_image(mlx->mlx, mlx->frame2.img);
+		mlx_loop_end(mlx->mlx);
+		mlx_destroy_display(mlx->mlx);
+		free(mlx->mlx);
 		free_map(mlx->map, mlx->height);
 		get_next_line(-1);
 		exit(0);
