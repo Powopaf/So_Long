@@ -6,18 +6,11 @@
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:01:21 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/12 13:32:32 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/19 13:36:37 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "run.h"
-
-static void	init_frame(t_data	*frame, void *mlx, size_t width, size_t height)
-{
-	frame->img = mlx_new_image(mlx, width * SCALE, height * SCALE);
-	frame->addr = mlx_get_data_addr(frame->img, &frame->bpp,
-			&frame->length, &frame->endian);
-}
 
 void	render_map(t_data *frame, t_map **map, size_t width, size_t height)
 {
@@ -65,6 +58,40 @@ static void	display(t_mlx *mlx)
 	mlx_loop(mlx->mlx);
 }
 
+static int	init_mlx(t_mlx *mlx, size_t width, size_t height)
+{
+	mlx->mlx = mlx_init();
+	if (!mlx->mlx)
+	{
+		mlx_destroy_display(mlx->mlx);
+		free(mlx->mlx);
+		return (1);
+	}
+	mlx->win = mlx_new_window(mlx->mlx, width * SCALE,
+			height * SCALE, "So_Long");
+	if (!mlx->win)
+	{
+		error_win(*mlx);
+		return (1);
+	}
+	return (0);
+}
+
+static int	init_frames(t_mlx *mlx)
+{
+	if (init_frame(&mlx->frame1, mlx->mlx, mlx->width, mlx->height))
+	{
+		error_f1(*mlx);
+		return (1);
+	}
+	if (init_frame(&mlx->frame2, mlx->mlx, mlx->width, mlx->height))
+	{
+		error_f2(*mlx);
+		return (1);
+	}
+	return (0);
+}
+
 void	run(t_map **map, size_t width, size_t height)
 {
 	t_mlx	mlx;
@@ -72,10 +99,10 @@ void	run(t_map **map, size_t width, size_t height)
 	mlx.map = map;
 	mlx.width = width;
 	mlx.height = height;
-	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, width * SCALE, height * SCALE, "So_Long");
 	mlx.moves = 0;
-	init_frame(&mlx.frame1, mlx.mlx, width, height);
-	init_frame(&mlx.frame2, mlx.mlx, width, height);
+	if (init_mlx(&mlx, width, height))
+		return ;
+	if (init_frames(&mlx))
+		return ;
 	display(&mlx);
 }

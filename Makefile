@@ -6,7 +6,7 @@
 #    By: pifourni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 11:01:47 by pifourni          #+#    #+#              #
-#    Updated: 2026/01/09 11:25:02 by pifourni         ###   ########.fr        #
+#    Updated: 2026/01/19 13:36:37 by pifourni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,11 @@
 
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-LIB = -lXext -lX11
+
+SAN_FLAGS ?= -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror $(SAN_FLAGS)
+LIB = -lXext -lX11 $(SAN_FLAGS)
+MLX_CFLAGS = -w
 MLX = minilibx-linux/libmlx_Linux.a
 LIBFT = libft/libft.a
 PRINTF = printf/libftprintf.a
@@ -24,9 +27,10 @@ PRINTF = printf/libftprintf.a
 SRC = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
 	  ./so_long.c \
 	  ./src/parser/parser.c ./src/parser/utils.c \
-	  ./src/game/run.c ./src/game/draw.c \
+	  ./src/game/run.c ./src/game/draw.c ./src/game/init.c \
 	  ./src/game/event/key.c ./src/game/event/key_utils.c \
-	  ./src/game/end.c
+	  ./src/game/end.c \
+	  ./src/game/error.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -39,12 +43,12 @@ $(MLX):
 	@echo -e '\033[32m MiniLibX Compiled ! \033[0m'
 $(LIBFT):
 	@echo -e '\033[34m Compiling Libft ... \033[0m'
-	$(MAKE) -C ./libft
+	$(MAKE) -C ./libft CFLAGS="$(CFLAGS)"
 	@echo -e '\033[32m Libft Compiled ! \033[0m'
 
 $(PRINTF):
 	@echo -e '\033[34m Compiling Ft_printf ... \033[0m'
-	$(MAKE) -C ./printf
+	$(MAKE) -C ./printf CFLAGS="$(CFLAGS)"
 	@echo -e '\033[32m Ft_printf Compiled ! \033[0m'
 
 $(NAME): $(OBJ) $(MLX) $(LIBFT) $(PRINTF)
