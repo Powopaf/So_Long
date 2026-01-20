@@ -32,10 +32,30 @@ typedef struct s_map
 	int		has_player;
 }	t_map;
 
+typedef struct s_queue
+{
+	int	x;
+	int	y;
+}	t_queue;
+
+typedef struct s_reach
+{
+	t_map	**map;
+	int		**visited;
+	t_queue	*queue;
+	size_t	height;
+	size_t	width;
+	int		total;
+	int		exit_found;
+	int		collectibles;
+	int		rear;
+}	t_reach;
+
 t_map	**parse_map(const char *map_path, size_t *height, size_t *width);
 void	close_fd(int fd, char *line);
 void	free_map(t_map **map, size_t height);
 int		check_line(char *line, size_t width, t_parser *parser);
 void	assign_map_object(t_map *map_cell, char obj);
+int		is_playable(t_map **map, size_t height, size_t width);
 
 #endif

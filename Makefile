@@ -25,7 +25,8 @@ PRINTF = printf/libftprintf.a
 
 SRC = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
 	  ./so_long.c \
-	  ./src/parser/parser.c ./src/parser/utils.c \
+	  ./src/parser/parser.c ./src/parser/utils.c ./src/parser/is_play.c \
+	  ./src/parser/is_play_utils.c \
 	  ./src/game/run.c ./src/game/draw.c ./src/game/init.c \
 	  ./src/game/event/key.c ./src/game/event/key_utils.c \
 	  ./src/game/end.c \

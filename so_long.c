@@ -65,6 +65,26 @@ int	check(t_map **map, size_t height, size_t width)
 	return (1);
 }
 
+static int	validate_map(t_map **map, size_t height, size_t width)
+{
+	if (!check(map, height, width))
+	{
+		free_map(map, height);
+		get_next_line(-1);
+		write(2, ERR_INVALID_MAP, sizeof(ERR_INVALID_MAP));
+		return (0);
+	}
+	if (!is_playable(map, height, width))
+	{
+		free_map(map, height);
+		get_next_line(-1);
+		write(2, "Error: Not all collectibles or exit are reachable!\n",
+			51);
+		return (0);
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_map	**map;
@@ -82,13 +102,8 @@ int	main(int argc, char **argv)
 		write(2, ERR_INVALID_MAP, sizeof(ERR_INVALID_MAP));
 		return (EXIT_FAILURE);
 	}
-	if (!check(map, height, width))
-	{
-		free_map(map, height);
-		get_next_line(-1);
-		write(2, ERR_INVALID_MAP, sizeof(ERR_INVALID_MAP));
+	if (!validate_map(map, height, width))
 		return (EXIT_FAILURE);
-	}
 	run(map, width, height);
 	return (EXIT_SUCCESS);
 }
