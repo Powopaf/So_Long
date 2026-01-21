@@ -85,6 +85,21 @@ static int	validate_map(t_map **map, size_t height, size_t width)
 	return (1);
 }
 
+static int	is_valid_map_extension(const char *filename)
+{
+	size_t	len;
+
+	if (!filename)
+		return (0);
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	if (filename[len - 4] == '.' && filename[len - 3] == 'b'
+		&& filename[len - 2] == 'e' && filename[len - 1] == 'r')
+		return (1);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_map	**map;
@@ -94,6 +109,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 	{
 		write(2, ERR_INVALID_ARGS, sizeof(ERR_INVALID_ARGS));
+		return (EXIT_FAILURE);
+	}
+	if (!is_valid_map_extension(argv[1]))
+	{
+		write(2, ERR_INVALID_MAP_EXT, sizeof(ERR_INVALID_MAP_EXT));
 		return (EXIT_FAILURE);
 	}
 	map = parse_map(argv[1], &height, &width);
