@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "parser.h"
-#include <stdlib.h>
 
 void	init_visited(int **visited, size_t height, size_t width)
 {

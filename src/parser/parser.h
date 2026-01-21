@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include <fcntl.h>
+# include <stdlib.h>
 # include "../../gnl/get_next_line.h"
 # include "../../libft/libft.h"
 
@@ -57,5 +58,10 @@ void	free_map(t_map **map, size_t height);
 int		check_line(char *line, size_t width, t_parser *parser);
 void	assign_map_object(t_map *map_cell, char obj);
 int		is_playable(t_map **map, size_t height, size_t width);
+void	init_visited(int **visited, size_t height, size_t width);
+void	free_visited(int **visited, size_t height);
+int		**allocate_visited(size_t height, size_t width);
+void	enqueue(t_reach *ctx, int x, int y);
+int		is_walkable(t_reach *ctx, int x, int y);
 
 #endif

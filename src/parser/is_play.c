@@ -11,13 +11,6 @@
 /* ************************************************************************** */
 
 #include "parser.h"
-#include <stdlib.h>
-
-void	init_visited(int **visited, size_t height, size_t width);
-void	free_visited(int **visited, size_t height);
-int		**allocate_visited(size_t height, size_t width);
-void	enqueue(t_reach *ctx, int x, int y);
-int		is_walkable(t_reach *ctx, int x, int y);
 
 static void	fill_initial_data(t_reach *ctx)
 {
