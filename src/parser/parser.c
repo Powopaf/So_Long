@@ -87,15 +87,15 @@ t_map	**parse_map(const char *map_path, size_t *height, size_t *width)
 	int			fd;
 
 	if (!check_map(map_path, width, height))
-		return (NULL);
+		return (get_next_line(-1), NULL);
 	map = malloc(sizeof(t_map *) * (*height));
 	if (map == NULL)
-		return (NULL);
+		return (get_next_line(-1), NULL);
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		return (free(map), NULL);
 	if (!build_map(map, *width, *height, fd))
-		return (close_fd(fd, NULL), free_map(map, *height), NULL);
+		return (get_next_line(-1), free_map(map, *height), NULL);
 	close(fd);
 	return (map);
 }

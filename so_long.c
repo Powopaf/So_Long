@@ -6,7 +6,7 @@
 /*   By: pifourni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:01:36 by pifourni          #+#    #+#             */
-/*   Updated: 2026/01/08 13:55:24 by pifourni         ###   ########.fr       */
+/*   Updated: 2026/01/22 13:06:08 by pifourni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ static int	validate_map(t_map **map, size_t height, size_t width)
 	{
 		free_map(map, height);
 		get_next_line(-1);
-		write(2, "Error: Not all collectibles or exit are reachable!\n",
-			51);
+		write(2, "Error:\n Not all collectibles or exit are reachable!\n",
+			52);
 		return (0);
 	}
 	return (1);
@@ -113,7 +113,7 @@ int	main(int argc, char **argv)
 	}
 	if (!is_valid_map_extension(argv[1]))
 	{
-		write(2, ERR_INVALID_MAP_EXT, sizeof(ERR_INVALID_MAP_EXT));
+		write(2, ERR_INVALID_MAP, sizeof(ERR_INVALID_MAP));
 		return (EXIT_FAILURE);
 	}
 	map = parse_map(argv[1], &height, &width);
