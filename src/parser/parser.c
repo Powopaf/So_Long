@@ -22,15 +22,21 @@ static int	process_lines(int fd, size_t *width, size_t *height,
 		t_parser *parser)
 {
 	char	*line;
+	size_t	line_width;
 
 	line = get_next_line(fd);
 	if (line == NULL)
 		return (close_fd(fd, line), 0);
-	*width = ft_strlen(line) - 1;
+	line_width = ft_strlen(line);
+	if (line_width > 0 && line[line_width - 1] == '\n')
+		line_width--;
+	*width = line_width;
 	while (line)
 	{
-		if (ft_strlen(line) - 1 != *width
-			|| !check_line(line, *width, parser))
+		line_width = ft_strlen(line);
+		if (line_width > 0 && line[line_width - 1] == '\n')
+			line_width--;
+		if (line_width != *width || !check_line(line, line_width, parser))
 			return (close_fd(fd, line), 0);
 		(*height)++;
 		free(line);
