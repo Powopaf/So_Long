@@ -16,7 +16,7 @@
 NAME = so_long
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -MMD -MP
 LIB = -lXext -lX11 
 MLX = minilibx-linux/libmlx_Linux.a
 LIBFT = libft/libft.a
@@ -32,6 +32,7 @@ SRC = ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
 	  ./src/game/error.c
 
 OBJ = $(SRC:.c=.o)
+DEP = $(SRC:.c=.d)
 
 all: $(MLX) $(LIBFT) $(PRINTF) $(NAME)
 
@@ -45,6 +46,8 @@ $(PRINTF):
 
 $(NAME): $(OBJ) $(MLX) $(LIBFT) $(PRINTF)
 	$(CC) -o $(NAME) $+ $(LIB) $(MLX) $(LIBFT) $(PRINTF)
+
+-include $(DEP)
 
 %.o:%.c
 	$(CC) $(CFLAGS) -o $@ -c $<
