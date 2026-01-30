@@ -6,7 +6,7 @@
 #    By: pifourni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/17 11:01:47 by pifourni          #+#    #+#              #
-#    Updated: 2026/01/19 13:36:37 by pifourni         ###   ########.fr        #
+#    Updated: 2026/01/30 10:04:56 by pifourni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ $(NAME): $(OBJ) $(MLX) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(DEP)
 	$(MAKE) -C ./minilibx-linux clean
 	$(MAKE) -C ./libft clean
 	$(MAKE) -C ./printf clean
